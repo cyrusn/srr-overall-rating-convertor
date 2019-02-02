@@ -1,0 +1,87 @@
+{
+  "chi": {
+    "code": "A010",
+    "subject": "CHINESE LANGUAGE",
+    "id": "chi"
+  },
+  "eng": {
+    "code": "A020",
+    "subject": "ENGLISH LANGUAGE",
+    "id": "eng"
+  },
+  "math": {
+    "code": "A030",
+    "subject": "MATHEMATICS COMPULSORY PART",
+    "id": "math"
+  },
+  "ls": {
+    "code": "A040",
+    "subject": "LIBERAL STUDIES",
+    "id": "ls"
+  },
+  "bio": {
+    "code": "A130",
+    "subject": "BIOLOGY",
+    "id": "bio"
+  },
+  "bafs": {
+    "code": "A172",
+    "subject": "BUSINESS, ACCOUNTING AND FINANCIAL STUDIES",
+    "id": "bafs"
+  },
+  "chem": {
+    "code": "A140",
+    "subject": "CHEMISTRY",
+    "id": "chem"
+  },
+  "chist": {
+    "code": "A070",
+    "subject": "CHINESE HISTORY",
+    "id": "chist"
+  },
+  "cs": {
+    "code": "A165",
+    "subject": "COMBINED SCIENCE",
+    "id": "cs"
+  },
+  "econ": {
+    "code": "A080",
+    "subject": "ECONOMICS",
+    "id": "econ"
+  },
+  "geog": {
+    "code": "A100",
+    "subject": "GEOGRAPHY",
+    "id": "geog"
+  },
+  "hist": {
+    "code": "A110",
+    "subject": "HISTORY",
+    "id": "hist"
+  },
+  "ict": {
+    "code": "A200",
+    "subject": "INFORMATION AND COMMUNICATION TECHNOLOGY",
+    "id": "ict"
+  },
+  "phy": {
+    "code": "A150",
+    "subject": "PHYSICS",
+    "id": "phy"
+  },
+  "ths": {
+    "code": "A120",
+    "subject": "TOURISM AND HOSPITALITY STUDIES",
+    "id": "ths"
+  },
+  "va": {
+    "code": "A230",
+    "subject": "VISUAL ARTS",
+    "id": "va"
+  },
+  "m2": {
+    "code": "A032",
+    "subject": "MATHEMATICS EXTENDED PART (ALGEBRA AND CALCULUS)",
+    "id": "m2"
+  }
+}
