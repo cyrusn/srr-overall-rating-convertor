@@ -1,19 +1,13 @@
 import json
-from helper import keyByRegno
-from subject import Subject
 from functools import reduce
 
-with open("./data/private/students.json") as students_file:
-    students_dict = keyByRegno(json.load(students_file))
-
-with open("./data/private/f6_report.json") as f6_report_file:
-    f6_report_dict = keyByRegno(json.load(f6_report_file))
-
-with open("./data/private/f5_term1_report.json") as f5_term1_report_file:
-    f5_term1_report_dict = keyByRegno(json.load(f5_term1_report_file))
-
-with open("./data/private/f5_term2_report.json") as f5_term2_report_file:
-    f5_term2_report_dict = keyByRegno(json.load(f5_term2_report_file))
+from subject import Subject
+from constant import (
+    students_dict,
+    f6_report_dict,
+    f5_term1_report_dict,
+    f5_term2_report_dict,
+)
 
 
 class Student:

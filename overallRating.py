@@ -1,5 +1,24 @@
-CORE_SUBJECTS = ["chi", "eng", "math", "ls"]
-SRR_OVERALL_RATING_CODES = ["R5", "R4", "R3", "R2", "R1"]
+from constant import core_subjects, srr_overall_rating_codes
+
+
+class OverallRating:
+    def __init__(self, subject, level, percentile):
+        self.subject = subject
+        self.level = level
+        self.percentile = percentile
+
+    @property
+    def score(self):
+        score = evaluateOverallRatingScore(self.level, self.percentile)
+
+        if self.subject in core_subjects:
+            return compareWithPreviousFormula(self.percentile, score)
+
+        return score
+
+    @property
+    def result(self):
+        return srr_overall_rating_codes[self.score]
 
 
 def evaluateOverallRatingScoreWithOldFormula(percentile):
@@ -16,6 +35,7 @@ def evaluateOverallRatingScoreWithOldFormula(percentile):
 
 
 def evaluateOverallRatingScore(level, percentile):
+    level = round(level)
     if level >= 5:
         return 4
     elif level == 4:
@@ -34,26 +54,6 @@ def compareWithPreviousFormula(percentile, overallRatingScore):
     #  for core subjects, will compare with old formula to max student's benefit
     scoreByPreviousFormula = evaluateOverallRatingScoreWithOldFormula(percentile)
     return max(scoreByPreviousFormula, overallRatingScore)
-
-
-class OverallRating:
-    def __init__(self, subject, level, percentile):
-        self.subject = subject
-        self.level = level
-        self.percentile = percentile
-
-    @property
-    def score(self):
-        score = evaluateOverallRatingScore(self.level, self.percentile)
-
-        if self.subject in CORE_SUBJECTS:
-            return compareWithPreviousFormula(self.percentile, score)
-
-        return score
-
-    @property
-    def result(self):
-        return SRR_OVERALL_RATING_CODES[self.score]
 
 
 if __name__ == "__main__":

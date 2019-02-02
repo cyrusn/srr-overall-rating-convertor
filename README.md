@@ -1,6 +1,6 @@
 # School Reference Report
 
-This repository generates the percentile report and overall rating performances report of SRR for JUPAS' application.
+This repository generates the **Percentile Report** and **Overall Rating Report** of academic performance in **School Reference Report** session for JUPAS' application.
 
 ## Preparation
 
@@ -65,17 +65,23 @@ User needs to prepare the above 3 JSON files, filename is matter, schema of the 
 python3 main.py
 ```
 
-## Percentile Report
+## Percentile Report Scale
 
-- P1 - Top 10%
-- P2 - 11% - 25%
-- P3 - 26% - 50%
-- P4 - 51% - 75%
-- P5 - Bottom 25%
+The percentile report will be generated with the following scale.
 
-## How to evaluate the SRR overall rating performance
+Indicator | Range
+--------- | ----------
+P1        | Top 10%
+P2        | 11% - 25%
+P3        | 26% - 50%
+P4        | 51% - 75%
+P5        | Bottom 25%
+
+## Overall Rating Report Scale
 
 ### Ratio
+
+The following ratio will be used to calculate the overall rating of each subjects.
 
 F5 First Term | F5 Second Term | F6 Mock
 ------------- | -------------- | -------
@@ -119,7 +125,7 @@ Percentile are evaluated from the ranking of students in subject. Weighted mean 
 
 #### Compare with previous method
 
-The above SRR performances will be compared with the previous percentile method, higher performance will go to student. Student's overall rating is simply retrieved from the percentiles below.
+The above method twill be compared with the previous method which simple using the following percentile to determine the overall rating. Better result will go to student.
 
 Excellent | Very Good | Good      | Average   | Below Average
 --------- | --------- | --------- | --------- | -------------

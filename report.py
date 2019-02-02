@@ -3,20 +3,19 @@ import csv
 
 from overallRating import OverallRating
 from subject_scores import Subject_Scores
-
-with open("./data/public/subjectInfo.json") as f:
-    subject_info_dict = json.load(f)
-
-subjectKeys = list(subject_info_dict.keys())
-subjectCodes = list([value["code"] for key, value in subject_info_dict.items()])
-
-basicInfoKeys = ["regno", "classno", "classcode", "chname", "enname"]
-srr_overall_rating_codes = ["R5", "R4", "R3", "R2", "R1"]
-srr_percentile_codes = ["P5", "P4", "P3", "P2", "P1"]
+from constant import (
+    basicInfoKeys,
+    srr_overall_rating_codes,
+    srr_percentile_codes,
+    subjectIDs,
+    subjectCodes,
+    subject_info_dict,
+)
 
 statistic_column = (
     ["subject"] + srr_percentile_codes[::-1] + srr_overall_rating_codes[::-1]
 )
+
 jupas_column = basicInfoKeys + subjectCodes
 
 
@@ -27,58 +26,94 @@ class Report:
 
     @property
     def students(self):
-        result = list()
-        for student in self.student_list:
-            sts = {}
+        def convertPercentileGrade(percentile):
+            result = 0
+            if percentile <= 10:
+                result = 4
+            elif percentile <= 25:
+                result = 3
+            elif percentile <= 50:
+                result = 2
+            elif percentile <= 75:
+                result = 1
+            else:
+                result = 0
+
+            return srr_percentile_codes[result]
+
+        def addPerformance(student, subject_scores):
+            performance = {}
             for subj in student.subjects:
                 subjectPerformances = student.performances[subj]
 
                 score = subjectPerformances["score"]
                 level = subjectPerformances["level"]
-                percentile = self.subject_scores.getPercentile(subj, score)
+                percentile = subject_scores.getPercentile(subj, score)
                 overallRating = OverallRating(subj, level, percentile).result
 
-                sts[subj] = {
+                performance[subj] = {
                     "level": level,
                     "score": score,
                     "percentile": convertPercentileGrade(percentile),
                     "overallRating": overallRating,
                 }
-            result.append({**student.info, **sts})
+            return {**student.info, **performance}
+
+        result = list()
+        for student in self.student_list:
+            student_with_performance = addPerformance(student, self.subject_scores)
+            result.append(student_with_performance)
         return result
 
     def getJUPASReport(self, type):
-        if type == "overallRating" or type == "percentile":
+        def validate(type):
+            return type == "overallRating" or type == "percentile"
+
+        def mapKeyBySubjectCodeAndMapValueByType(student, type):
+            sts = dict()
+            for key, val in student.items():
+                if key in subjectIDs:
+                    code = subject_info_dict[key]["code"]
+                    sts[code] = val[type]
+                else:
+                    sts[key] = val
+            return sts
+
+        if validate(type):
             result = []
             for student in self.students:
-                sts = dict()
-                for key, val in student.items():
-                    if key in subjectKeys:
-                        code = subject_info_dict[key]["code"]
-                        sts[code] = val[type]
-                    else:
-                        sts[key] = val
+                sts = mapKeyBySubjectCodeAndMapValueByType(student, type)
                 result.append(sts)
             return result
 
     @property
     def statistic(self):
-        statistic = list()
-        subjects = dict()
-        for key in subjectKeys:
-            subjects[key] = list()
+        def mapSubjectID(subjects):
+            for key in subjectIDs:
+                subjects[key] = list()
 
-        for student in self.students:
+        def appendOverallRatingAndPercentile(subjects, student):
             for key, value in student.items():
-                if key in subjectKeys:
+                if key in subjectIDs:
                     subjects[key].append(value["overallRating"])
                     subjects[key].append(value["percentile"])
 
-        for key, value in subjects.items():
+        def countBy(value, keys):
             result = dict()
-            for rating in srr_overall_rating_codes + srr_percentile_codes:
+            for rating in keys:
                 result[rating] = value.count(rating)
-            result["subject"] = key
+            return result
+
+        subjects = dict()
+        mapSubjectID(subjects)
+        for student in self.students:
+            appendOverallRatingAndPercentile(subjects, student)
+
+        statistic = list()
+        for subject, value in subjects.items():
+            keys = srr_overall_rating_codes + srr_percentile_codes
+            result = countBy(value, keys)
+            result["subject"] = subject
             statistic.append(result)
 
         return statistic
@@ -115,19 +150,3 @@ def writeCSV(filename, data, headers):
         writer.writeheader()
         for d in data:
             writer.writerow(d)
-
-
-def convertPercentileGrade(percentile):
-    result = 0
-    if percentile <= 10:
-        result = 4
-    elif percentile <= 25:
-        result = 3
-    elif percentile <= 50:
-        result = 2
-    elif percentile <= 75:
-        result = 1
-    else:
-        result = 0
-
-    return srr_percentile_codes[result]

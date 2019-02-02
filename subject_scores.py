@@ -1,16 +1,13 @@
 import json
-from student import Student
 from math import floor
 
-with open("./data/public/subjectInfo.json") as f:
-    subject_info_dict = json.load(f)
-
-subjectKeys = list(subject_info_dict.keys())
+from student import Student
+from constant import subjectIDs
 
 
 class Subject_Scores:
     def __init__(self):
-        for subjectKey in subjectKeys:
+        for subjectKey in subjectIDs:
             self.__dict__[subjectKey] = list()
 
     def getScores(self, subject):

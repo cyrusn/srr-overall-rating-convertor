@@ -1,7 +1,6 @@
 import json
 
-with open("./data/public/subjectLevelCriteria.json") as f:
-    criteria = json.load(f)
+from constant import criteria
 
 
 class Subject:
@@ -12,8 +11,7 @@ class Subject:
         for criterion in criteria:
             if criterion["subject"] != self.id:
                 continue
-            min = criterion["range"][0]
-            max = criterion["range"][1]
+            min, max = criterion["range"]
             if score >= min and score <= max:
                 return criterion["level"]
 
