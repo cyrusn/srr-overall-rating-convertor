@@ -8,21 +8,22 @@ from constant import subjectIDs
 class Subject_Scores:
     def __init__(self):
         for subjectKey in subjectIDs:
-            self.__dict__[subjectKey] = list()
+            setattr(self, subjectKey, list())
 
     def getScores(self, subject):
-        return self.__dict__[subject]
+        return getattr(self, subject)
 
     def getPercentile(self, subject, score):
-        scores = self.__dict__[subject]
+        scores = self.getScores(subject)
         rank = scores.index(score)
         percentile = (rank / len(scores)) * 100
         return floor(percentile)
 
     def importPerformances(self, performances):
         for subjectKey, performance in performances.items():
-            self.__dict__[subjectKey].append(performance["score"])
-            self.__dict__[subjectKey].sort(reverse=True)
+            scores = self.getScores(subjectKey)
+            scores.append(performance["score"])
+            scores.sort(reverse=True)
 
 
 if __name__ == "__main__":
