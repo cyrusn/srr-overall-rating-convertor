@@ -7,8 +7,8 @@ from constant import subjectIDs
 
 class Subject_Scores:
     def __init__(self):
-        for subjectKey in subjectIDs:
-            setattr(self, subjectKey, list())
+        for id in subjectIDs:
+            setattr(self, id, list())
 
     def getScores(self, subject):
         return getattr(self, subject)

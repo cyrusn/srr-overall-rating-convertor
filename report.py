@@ -12,8 +12,13 @@ from constant import (
     subject_info_dict,
 )
 
+
+def reversed(lst):
+    return lst[::-1]
+
+
 statistic_column = (
-    ["subject"] + srr_percentile_codes[::-1] + srr_overall_rating_codes[::-1]
+    ["subject"] + reversed(srr_percentile_codes) + reversed(srr_overall_rating_codes)
 )
 
 jupas_column = basicInfoKeys + subjectCodes
@@ -41,7 +46,7 @@ class Report:
 
             return srr_percentile_codes[result]
 
-        def addPerformance(student, subject_scores):
+        def mapPerformance(student, subject_scores):
             performance = {}
             for subj in student.subjects:
                 subjectPerformances = student.performances[subj]
@@ -61,7 +66,7 @@ class Report:
 
         result = list()
         for student in self.student_list:
-            student_with_performance = addPerformance(student, self.subject_scores)
+            student_with_performance = mapPerformance(student, self.subject_scores)
             result.append(student_with_performance)
         return result
 
@@ -88,9 +93,11 @@ class Report:
 
     @property
     def statistic(self):
-        def mapSubjectID(subjects):
+        def createSubjectsDict():
+            subjects = dict()
             for key in subjectIDs:
                 subjects[key] = list()
+            return subjects
 
         def appendOverallRatingAndPercentile(subjects, student):
             for key, value in student.items():
@@ -100,20 +107,24 @@ class Report:
 
         def countBy(value, keys):
             result = dict()
-            for rating in keys:
-                result[rating] = value.count(rating)
+            for key in keys:
+                result[key] = value.count(key)
             return result
 
-        subjects = dict()
-        mapSubjectID(subjects)
+        def countPerformance(performance, subject):
+            ratings = srr_overall_rating_codes + srr_percentile_codes
+            result = countBy(performance, ratings)
+            result["subject"] = subject
+            return result
+
+        subjects = createSubjectsDict()
+        statistic = list()
+
         for student in self.students:
             appendOverallRatingAndPercentile(subjects, student)
 
-        statistic = list()
-        for subject, value in subjects.items():
-            keys = srr_overall_rating_codes + srr_percentile_codes
-            result = countBy(value, keys)
-            result["subject"] = subject
+        for subject, performance in subjects.items():
+            result = countPerformance(performance, subject)
             statistic.append(result)
 
         return statistic
