@@ -1,5 +1,3 @@
-import json
-
 from constant import criteria
 
 
@@ -19,4 +17,3 @@ class Subject:
 if __name__ == "__main__":
     bio = Subject("bio")
     print(bio.toLevel(119))
-

@@ -1,5 +1,4 @@
 from student import Student
-from subject import Subject
 from report import Report
 from subject_scores import Subject_Scores
 from constant import students_list
@@ -15,4 +14,3 @@ for sts in students_list:
 
 report = Report(student_list, subject_scores)
 report.writeAll()
-

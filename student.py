@@ -1,4 +1,3 @@
-import json
 from functools import reduce
 
 from subject import Subject

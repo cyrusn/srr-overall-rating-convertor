@@ -1,4 +1,3 @@
-import json
 from math import floor
 
 from student import Student

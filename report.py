@@ -2,7 +2,6 @@ import json
 import csv
 
 from overallRating import OverallRating
-from subject_scores import Subject_Scores
 from constant import (
     basicInfoKeys,
     srr_overall_rating_codes,
