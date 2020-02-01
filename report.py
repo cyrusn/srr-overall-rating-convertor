@@ -132,6 +132,7 @@ class Report:
     def writeJSON(self):
         with open("./report/students.json", "w", encoding="utf8") as f:
             json.dump(self.students, f, indent=2, ensure_ascii=False)
+            print("Report is generated: student.json")
 
     def writeOverallRatingCSV(self):
         writeCSV(
@@ -139,14 +140,17 @@ class Report:
             self.getJUPASReport("overallRating"),
             jupas_column,
         )
+        print("Report is generated: overallRating.csv")
 
     def writePercentileCSV(self):
         writeCSV(
             "./report/percentile.csv", self.getJUPASReport("percentile"), jupas_column
         )
+        print("Report is generated: percentile.csv")
 
     def writeStatisticCSV(self):
         writeCSV("./report/statistic.csv", self.statistic, statistic_column)
+        print("Report is generated: statistic.csv")
 
     def writeAll(self):
         self.writeJSON()
