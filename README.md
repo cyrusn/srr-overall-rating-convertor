@@ -4,7 +4,7 @@ This repository generates the **Percentile Report** and **Overall Rating Report*
 
 ## Preparation
 
-### Reports files and other json files
+### Reports files and other JSON files
 
 - Report files
 
@@ -12,7 +12,7 @@ This repository generates the **Percentile Report** and **Overall Rating Report*
   - `./data/private/f5_term2_report.json`
   - `./data/private/f6_report.json`
 
-User needs to prepare the above 3 JSON files, filename is matter, schema of the json file is listed at [schema session](#schema).
+User needs to prepare the above 3 JSON files, filename is matter, schema of the JSON file is listed at [schema session](#schema).
 
 `./data/private/students.json` stores all basic information of each students. Please see the schema in [schema session](#schema).
 
@@ -59,6 +59,16 @@ User needs to prepare the above 3 JSON files, filename is matter, schema of the 
 }, ...]
 ```
 
+```javascript
+// electives.json
+// e.g.
+{
+  "1213075": ["bafs", "cs"],
+  "1211002": ["chist", "econ"],
+  ...
+}
+```
+
 ## Run
 
 ```sh
@@ -69,13 +79,13 @@ python3 main.py
 
 The percentile report will be generated with the following scale.
 
-Indicator | Range
---------- | ----------
-P1        | Top 10%
-P2        | 11% - 25%
-P3        | 26% - 50%
-P4        | 51% - 75%
-P5        | Bottom 25%
+| Indicator | Range      |
+| --------- | ---------- |
+| P1        | Top 10%    |
+| P2        | 11% - 25%  |
+| P3        | 26% - 50%  |
+| P4        | 51% - 75%  |
+| P5        | Bottom 25% |
 
 ## Overall Rating Report Scale
 
@@ -83,9 +93,9 @@ P5        | Bottom 25%
 
 The following ratio will be used to calculate the overall rating of each subjects.
 
-F5 First Term | F5 Second Term | F6 Mock
-------------- | -------------- | -------
-25%           | 25%            | 50%
+| F5 First Term | F5 Second Term | F6 Mock |
+| ------------- | -------------- | ------- |
+| 25%           | 25%            | 50%     |
 
 ### Shorthand
 
@@ -127,6 +137,16 @@ Percentile are evaluated from the ranking of students in subject. Weighted mean 
 
 The above method twill be compared with the previous method which simple using the following percentile to determine the overall rating. Better result will go to student.
 
-Excellent | Very Good | Good      | Average   | Below Average
---------- | --------- | --------- | --------- | -------------
-Top 5%    | 5% – 10%  | 10% – 20% | 20% – 50% | Bottom 50%
+| Excellent | Very Good | Good      | Average   | Below Average |
+| --------- | --------- | --------- | --------- | ------------- |
+| Top 5%    | 5% – 10%  | 10% – 20% | 20% – 50% | Bottom 50%    |
+
+## TODO
+
+- Directly parse the excel files that are exported from WEBSAM. So files below should prepare.
+
+  - F5 term 1 report with related grading scale
+  - F5 term 2 report with related grading scale
+  - F6 Mock report with related grading scale
+  - Students' information
+  - Subject information (includes the subject code and short name)

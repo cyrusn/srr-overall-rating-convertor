@@ -2,14 +2,14 @@ from constant import core_subjects, srr_overall_rating_codes
 
 
 class OverallRating:
-    def __init__(self, subject, level, percentile):
+    def __init__(self, subject, grade, percentile):
         self.subject = subject
-        self.level = level
+        self.grade = grade
         self.percentile = percentile
 
     @property
     def score(self):
-        score = evaluateOverallRatingScore(self.level, self.percentile)
+        score = evaluateOverallRatingScore(self.grade, self.percentile)
 
         if self.subject in core_subjects:
             return compareWithPreviousFormula(self.percentile, score)
@@ -34,17 +34,17 @@ def evaluateOverallRatingScoreWithOldFormula(percentile):
         return 0
 
 
-def evaluateOverallRatingScore(level, percentile):
-    level = round(level)
-    if level >= 5:
+def evaluateOverallRatingScore(grade, percentile):
+    grade = round(grade)
+    if grade >= 5:
         return 4
-    elif level == 4:
+    elif grade == 4:
         return 4 if percentile <= 10 else 3
-    elif level == 3:
+    elif grade == 3:
         return 3 if percentile <= 40 else 2
-    elif level == 2:
+    elif grade == 2:
         return 2 if percentile <= 60 else 1
-    elif level == 1:
+    elif grade == 1:
         return 1 if percentile <= 80 else 0
     else:
         return 0
@@ -62,4 +62,3 @@ if __name__ == "__main__":
     # overallRating = OverallRating("chi", 5, 12)
     overallRating = OverallRating("va", 0, 50)
     print(overallRating.result)
-

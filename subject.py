@@ -1,19 +1,19 @@
-from constant import criteria
+from constant import gradings_f5_term1
 
 
 class Subject:
     def __init__(self, id):
         self.id = id
 
-    def toLevel(self, score):
-        for criterion in criteria:
-            if criterion["subject"] != self.id:
+    def scoreToGrade(self, score, gradings):
+        for grading in gradings:
+            if grading["subject"] != self.id:
                 continue
-            min, max = criterion["range"]
+            min, max = grading["range"]
             if score >= min and score <= max:
-                return criterion["level"]
+                return grading["grade"]
 
 
 if __name__ == "__main__":
     bio = Subject("bio")
-    print(bio.toLevel(119))
+    print(bio.scoreToGrade(119, gradings_f5_term1))

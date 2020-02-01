@@ -24,9 +24,10 @@ jupas_column = basicInfoKeys + subjectCodes
 
 
 class Report:
-    def __init__(self, student_list, subject_scores):
+    def __init__(self, student_list, subject_scores, terms):
         self.student_list = student_list
         self.subject_scores = subject_scores
+        self.terms = terms
 
     @property
     def students(self):
@@ -48,15 +49,15 @@ class Report:
         def mapPerformance(student, subject_scores):
             performance = {}
             for subject in student.subjects:
-                subjectPerformances = student.performances[subject]
+                subjectPerformances = student.getPerformances(self.terms)[subject]
 
                 score = subjectPerformances["score"]
-                level = subjectPerformances["level"]
+                grade = subjectPerformances["grade"]
                 percentile = subject_scores.getPercentile(subject, score)
-                overallRating = OverallRating(subject, level, percentile).result
+                overallRating = OverallRating(subject, grade, percentile).result
 
                 performance[subject] = {
-                    "level": level,
+                    "grade": grade,
                     "score": score,
                     "percentile": convertPercentileGrade(percentile),
                     "overallRating": overallRating,
