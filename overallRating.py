@@ -2,7 +2,7 @@ from constant import core_subjects, srr_overall_rating_codes
 
 
 class OverallRating:
-    def __init__(self, subject, grade, percentile):
+    def __init__(self, subject: str, grade: float, percentile: float):
         self.subject = subject
         self.grade = grade
         self.percentile = percentile
@@ -12,7 +12,12 @@ class OverallRating:
         score = evaluateOverallRatingScore(self.grade, self.percentile)
 
         if self.subject in core_subjects:
-            return compareWithPreviousFormula(self.percentile, score)
+            # for core subjects, score is compated with old formula
+            # to max student's benefit
+            scoreWithOldFormula = evaluateOverallRatingScoreWithOldFormula(
+                self.percentile
+            )
+            return max(scoreWithOldFormula, score)
 
         return score
 
@@ -21,7 +26,7 @@ class OverallRating:
         return srr_overall_rating_codes[self.score]
 
 
-def evaluateOverallRatingScoreWithOldFormula(percentile):
+def evaluateOverallRatingScoreWithOldFormula(percentile: float) -> int:
     if percentile <= 5:
         return 4
     elif percentile <= 10:
@@ -34,7 +39,7 @@ def evaluateOverallRatingScoreWithOldFormula(percentile):
         return 0
 
 
-def evaluateOverallRatingScore(grade, percentile):
+def evaluateOverallRatingScore(grade: float, percentile: float) -> int:
     grade = round(grade)
     if grade >= 5:
         return 4
@@ -48,12 +53,6 @@ def evaluateOverallRatingScore(grade, percentile):
         return 1 if percentile <= 80 else 0
     else:
         return 0
-
-
-def compareWithPreviousFormula(percentile, overallRatingScore):
-    #  for core subjects, will compare with old formula to max student's benefit
-    scoreByPreviousFormula = evaluateOverallRatingScoreWithOldFormula(percentile)
-    return max(scoreByPreviousFormula, overallRatingScore)
 
 
 if __name__ == "__main__":

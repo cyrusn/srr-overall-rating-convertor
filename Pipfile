@@ -9,7 +9,7 @@ flake8 = "*"
 mypy = "*"
 
 [packages]
-openpyxl = "*"
+scipy = "*"
 
 [requires]
 python_version = "3.8"

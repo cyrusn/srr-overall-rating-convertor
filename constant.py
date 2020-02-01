@@ -18,8 +18,10 @@ with open("./data/private/students.json") as f:
 
 with open("./data/public/subjectGrading.json") as f:
     gradings_f5_term1 = json.load(f)
+
 with open("./data/public/subjectGrading.json") as f:
     gradings_f5_term2 = json.load(f)
+
 with open("./data/public/subjectGrading.json") as f:
     gradings_f6 = json.load(f)
 
