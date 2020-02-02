@@ -1,8 +1,10 @@
-from student import Student
+from typing import List
+
+from student import Student, Term
 from report import Report
 from subject_scores import Subject_Scores
 from constant import (
-    students_list,
+    students,
     f6_report_dict,
     f5_term1_report_dict,
     f5_term2_report_dict,
@@ -11,20 +13,20 @@ from constant import (
     gradings_f6,
 )
 
-terms = [
+terms: List[Term] = [
     {"score": f6_report_dict, "ratio": 0.5, "gradings": gradings_f6},
     {"score": f5_term2_report_dict, "ratio": 0.25, "gradings": gradings_f5_term2},
     {"score": f5_term1_report_dict, "ratio": 0.25, "gradings": gradings_f5_term1},
 ]
 
 subject_scores = Subject_Scores()
-student_list = list()
+students_with_performances = list()
 
-for sts in students_list:
+for sts in students:
     student = Student(sts["regno"])
     performances = student.getPerformances(terms)
     subject_scores.importPerformances(performances)
-    student_list.append(student)
+    students_with_performances.append(student)
 
-report = Report(student_list, subject_scores, terms)
+report = Report(students_with_performances, subject_scores, terms)
 report.writeAll()

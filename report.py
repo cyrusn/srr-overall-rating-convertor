@@ -24,8 +24,8 @@ jupas_column = basicInfoKeys + subjectCodes
 
 
 class Report:
-    def __init__(self, student_list, subject_scores, terms):
-        self.student_list = student_list
+    def __init__(self, students_with_performances, subject_scores, terms):
+        self.students_with_performances = students_with_performances
         self.subject_scores = subject_scores
         self.terms = terms
 
@@ -65,7 +65,7 @@ class Report:
             return {**student.info, **performance}
 
         result = list()
-        for student in self.student_list:
+        for student in self.students_with_performances:
             student_with_performance = mapPerformance(student, self.subject_scores)
             result.append(student_with_performance)
         return result

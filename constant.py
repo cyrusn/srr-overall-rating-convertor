@@ -14,7 +14,7 @@ with open("./data/public/subjectInfo.json") as f:
     subject_info_dict = json.load(f)
 
 with open("./data/private/students.json") as f:
-    students_list = json.load(f)
+    students = json.load(f)
 
 with open("./data/public/subjectGrading.json") as f:
     gradings_f5_term1 = json.load(f)
