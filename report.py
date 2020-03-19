@@ -57,8 +57,8 @@ class Report:
                 overallRating = OverallRating(subject, grade, percentile).result
 
                 performance[subject] = {
-                    "grade": grade,
-                    "score": score,
+                    "grade": round(grade, 2),
+                    "score": round(score, 2),
                     "percentile": convertPercentileGrade(percentile),
                     "overallRating": overallRating,
                 }
