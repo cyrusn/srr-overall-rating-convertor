@@ -1,87 +1,70 @@
 {
   "chi": {
     "code": "A010",
-    "subject": "CHINESE LANGUAGE",
-    "id": "chi"
+    "subject": "CHINESE LANGUAGE"
   },
   "eng": {
     "code": "A020",
-    "subject": "ENGLISH LANGUAGE",
-    "id": "eng"
+    "subject": "ENGLISH LANGUAGE"
   },
   "math": {
     "code": "A030",
-    "subject": "MATHEMATICS COMPULSORY PART",
-    "id": "math"
+    "subject": "MATHEMATICS COMPULSORY PART"
   },
   "ls": {
     "code": "A040",
-    "subject": "LIBERAL STUDIES",
-    "id": "ls"
+    "subject": "LIBERAL STUDIES"
   },
   "bio": {
     "code": "A130",
-    "subject": "BIOLOGY",
-    "id": "bio"
+    "subject": "BIOLOGY"
   },
   "bafs": {
     "code": "A172",
-    "subject": "BUSINESS, ACCOUNTING AND FINANCIAL STUDIES",
-    "id": "bafs"
+    "subject": "BUSINESS, ACCOUNTING AND FINANCIAL STUDIES"
   },
   "chem": {
     "code": "A140",
-    "subject": "CHEMISTRY",
-    "id": "chem"
+    "subject": "CHEMISTRY"
   },
   "chist": {
     "code": "A070",
-    "subject": "CHINESE HISTORY",
-    "id": "chist"
+    "subject": "CHINESE HISTORY"
   },
   "cs": {
     "code": "A165",
-    "subject": "COMBINED SCIENCE",
-    "id": "cs"
+    "subject": "COMBINED SCIENCE"
   },
   "econ": {
     "code": "A080",
-    "subject": "ECONOMICS",
-    "id": "econ"
+    "subject": "ECONOMICS"
   },
   "geog": {
     "code": "A100",
-    "subject": "GEOGRAPHY",
-    "id": "geog"
+    "subject": "GEOGRAPHY"
   },
   "hist": {
     "code": "A110",
-    "subject": "HISTORY",
-    "id": "hist"
+    "subject": "HISTORY"
   },
   "ict": {
     "code": "A200",
-    "subject": "INFORMATION AND COMMUNICATION TECHNOLOGY",
-    "id": "ict"
+    "subject": "INFORMATION AND COMMUNICATION TECHNOLOGY"
   },
   "phy": {
     "code": "A150",
-    "subject": "PHYSICS",
-    "id": "phy"
+    "subject": "PHYSICS"
   },
   "ths": {
     "code": "A120",
-    "subject": "TOURISM AND HOSPITALITY STUDIES",
-    "id": "ths"
+    "subject": "TOURISM AND HOSPITALITY STUDIES"
   },
   "va": {
     "code": "A230",
-    "subject": "VISUAL ARTS",
-    "id": "va"
+    "subject": "VISUAL ARTS"
   },
   "m2": {
     "code": "A032",
-    "subject": "MATHEMATICS EXTENDED PART (ALGEBRA AND CALCULUS)",
-    "id": "m2"
+    "subject": "MATHEMATICS EXTENDED PART (ALGEBRA AND CALCULUS)"
   }
 }
