@@ -1,6 +1,6 @@
 # School Reference Report
 
-This repository generates the **Percentile Report** and **Overall Rating Report** of academic performance in **School Reference Report** session for JUPAS' application.
+This repository generates the **Percentile Report** and **Overall Rating Report** of academic performance in **School Reference Report** session for JUPAS application.
 
 ## Preparation
 
@@ -23,7 +23,10 @@ User needs to prepare the above 3 JSON files, filename is matter, schema of the 
 ### Schema
 
 ```javascript
-// reports schema
+// report schema for
+// - f5_term1_report.json
+// - f5_term2_report.json
+// - f6_report.json
 [{
   "regno": Number,
   "chi": Number,
@@ -37,7 +40,7 @@ User needs to prepare the above 3 JSON files, filename is matter, schema of the 
 ```
 
 ```javascript
-// students schema
+// students.json schema
 [{
   "regno": Number,
   "classcode": String,
@@ -50,13 +53,24 @@ User needs to prepare the above 3 JSON files, filename is matter, schema of the 
 ```javascript
 // subjectLevelCriteria.json
 [{
-  // subject subject, please refer to `./data/public/subjectInfo.json`
+  // subject key in subjectInfo.json
   "subject": String,
-  // DSE level e.g. 4 mean level 4
+  // predicted DSE level e.g. 4 mean level 4
   "level": Number,
-  // range of attain the level, former is min and latter is max
+  // range of attain the level, `[min, max]`
   "range": [Number, Number]
 }, ...]
+```
+
+```json
+// subjectInfo.json
+{
+  "chi": {
+    "code": "A010",
+    "subject": "CHINESE LANGUAGE"
+  },
+  ...
+}
 ```
 
 ## Run
