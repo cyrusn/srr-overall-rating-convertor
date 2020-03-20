@@ -10,6 +10,17 @@ def keyByRegno(lst):
     return {item["regno"]: item for item in lst}
 
 
+def createStudentElectiveDict(lst):
+    excluded_keys = core_subjects + ["regno"]
+
+    def get_keys(d, excluded_keys):
+        return [key for key in d.keys() if key not in excluded_keys]
+
+    return {
+        item["regno"]: [key for key in get_keys(item, excluded_keys)] for item in lst
+    }
+
+
 with open("./data/public/subjectInfo.json") as f:
     subject_info_dict = json.load(f)
 
@@ -28,11 +39,10 @@ with open("./data/public/subjectGrading.json") as f:
 with open("./data/private/students.json") as students_file:
     students_dict = keyByRegno(json.load(students_file))
 
-with open("./data/private/electives.json") as electives_file:
-    electives = json.load(electives_file)
-
 with open("./data/private/f6_report.json") as f6_report_file:
-    f6_report_dict = keyByRegno(json.load(f6_report_file))
+    f6_report_json = json.load(f6_report_file)
+    f6_report_dict = keyByRegno(f6_report_json)
+    electives = createStudentElectiveDict(f6_report_json)
 
 with open("./data/private/f5_term1_report.json") as f5_term1_report_file:
     f5_term1_report_dict = keyByRegno(json.load(f5_term1_report_file))

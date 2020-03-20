@@ -39,7 +39,7 @@ User needs to prepare the above 3 JSON files, filename is matter, schema of the 
 ```javascript
 // students schema
 [{
-  "regno": Number,  
+  "regno": Number,
   "classcode": String,
   "classno": Number,
   "chname": String,
@@ -57,16 +57,6 @@ User needs to prepare the above 3 JSON files, filename is matter, schema of the 
   // range of attain the level, former is min and latter is max
   "range": [Number, Number]
 }, ...]
-```
-
-```javascript
-// electives.json
-// e.g.
-{
-  "1213075": ["bafs", "cs"],
-  "1211002": ["chist", "econ"],
-  ...
-}
 ```
 
 ## Run
