@@ -48,17 +48,20 @@ class Report:
 
         def mapPerformance(student, subject_scores):
             performance = {}
-            for subject in student.subjects:
-                subjectPerformances = student.getPerformances(self.terms)[subject]
+            for subject_id in student.subjects:
+                subjectPerformances = student.getPerformances(self.terms)[subject_id]
 
                 score = subjectPerformances["score"]
                 grade = subjectPerformances["grade"]
-                percentile = subject_scores.getPercentile(subject, score)
-                overallRating = OverallRating(subject, grade, percentile).result
+                rank, size = subject_scores.getRank(subject_id, score)
+                percentile = subject_scores.getPercentile(subject_id, score)
+                overallRating = OverallRating(subject_id, grade, percentile).result
 
-                performance[subject] = {
+                performance[subject_id] = {
                     "grade": round(grade, 2),
                     "score": round(score, 2),
+                    "rank": rank,
+                    "size": size,
                     "percentile": convertPercentileGrade(percentile),
                     "overallRating": overallRating,
                 }

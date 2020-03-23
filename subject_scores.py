@@ -3,7 +3,7 @@ from math import floor
 from student import Student, Term, Performance
 from constant import subjectIDs
 
-from typing import Dict, List
+from typing import Dict, List, Tuple
 
 
 class Subject_Scores:
@@ -14,11 +14,19 @@ class Subject_Scores:
     def getScores(self, subject_id: str) -> List[float]:
         return getattr(self, subject_id)
 
-    def getPercentile(self, subject_id: str, score: float) -> float:
+    def getRank(self, subject_id: str, score: float) -> Tuple[int, int]:
+        """
+            getRank return the tuple of the ranking and the total number of students 
+            of subject.
+        """
         scores: List[float] = self.getScores(subject_id)
         scores.sort(reverse=True)
         rank = scores.index(score)
-        percentile = (rank / len(scores)) * 100
+        return (rank, len(scores))
+
+    def getPercentile(self, subject_id: str, score: float) -> float:
+        (rank, size) = self.getRank(subject_id, score)
+        percentile = (rank / size) * 100
         return floor(percentile)
 
     def importPerformances(self, performances: Dict[str, Performance]):
