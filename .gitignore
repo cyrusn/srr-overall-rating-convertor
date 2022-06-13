@@ -117,6 +117,6 @@ dmypy.json
 
 
 # custom
-/data/private/*.json
-/report/*.json
-/report/*.csv
+/data/private/*/*.json
+/report/*/*.json
+/report/*/*.csv
