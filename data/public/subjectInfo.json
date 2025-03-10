@@ -11,9 +11,9 @@
     "code": "A030",
     "subject": "MATHEMATICS COMPULSORY PART"
   },
-  "ls": {
-    "code": "A040",
-    "subject": "LIBERAL STUDIES"
+  "csd": {
+    "code": "A045",
+    "subject": "Citizenship and Social Development"
   },
   "bio": {
     "code": "A130",
@@ -30,10 +30,6 @@
   "chist": {
     "code": "A070",
     "subject": "CHINESE HISTORY"
-  },
-  "cs": {
-    "code": "A165",
-    "subject": "COMBINED SCIENCE"
   },
   "econ": {
     "code": "A080",
@@ -62,6 +58,10 @@
   "va": {
     "code": "A230",
     "subject": "VISUAL ARTS"
+  },
+  "hmsc": {
+    "code": "A190",
+    "subject": "Health Management and Social Care"
   },
   "m2": {
     "code": "A032",

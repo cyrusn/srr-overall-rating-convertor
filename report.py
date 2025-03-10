@@ -3,6 +3,7 @@ import csv
 
 from overallRating import OverallRating
 from constant import (
+    report_location,
     basicInfoKeys,
     srr_overall_rating_codes,
     srr_percentile_codes,
@@ -12,12 +13,20 @@ from constant import (
 )
 
 
+def sortFunc(sts):
+    classcode = sts["classcode"]
+    classno = sts["classno"]
+    return f"{classcode}{classno:02}"
+
+
 def reversed(lst):
     return lst[::-1]
 
 
 statistic_column = (
-    ["subject"] + reversed(srr_percentile_codes) + reversed(srr_overall_rating_codes)
+    ["subject"]
+    + reversed(srr_percentile_codes)
+    + reversed(srr_overall_rating_codes)
 )
 
 jupas_column = basicInfoKeys + subjectCodes
@@ -49,13 +58,15 @@ class Report:
         def mapPerformance(student, subject_scores):
             performance = {}
             for subject_id in student.subjects:
-                subjectPerformances = student.getPerformances(self.terms)[subject_id]
+                subjectPerformances = student.getPerformances(self.terms)[
+                    subject_id]
 
                 score = subjectPerformances["score"]
                 grade = subjectPerformances["grade"]
                 rank, size = subject_scores.getRank(subject_id, score)
                 percentile = subject_scores.getPercentile(subject_id, score)
-                overallRating = OverallRating(subject_id, grade, percentile).result
+                overallRating = OverallRating(
+                    subject_id, grade, percentile).result
 
                 performance[subject_id] = {
                     "grade": round(grade, 2),
@@ -69,7 +80,8 @@ class Report:
 
         result = list()
         for student in self.students_with_performances:
-            student_with_performance = mapPerformance(student, self.subject_scores)
+            student_with_performance = mapPerformance(
+                student, self.subject_scores)
             result.append(student_with_performance)
         return result
 
@@ -92,6 +104,7 @@ class Report:
             for student in self.students:
                 sts = mapKeyBySubjectCodeAndMapValueByType(student, type)
                 result.append(sts)
+            result.sort(key=sortFunc)
             return result
 
     @property
@@ -133,13 +146,15 @@ class Report:
         return statistic
 
     def writeJSON(self):
-        with open("./report/students.json", "w", encoding="utf8") as f:
+        with open(
+            f"{report_location}/students.json", "w", encoding="utf8"
+        ) as f:
             json.dump(self.students, f, indent=2, ensure_ascii=False)
             print("Report is generated: student.json")
 
     def writeOverallRatingCSV(self):
         writeCSV(
-            "./report/overallRating.csv",
+            f"{report_location}/overallRating.csv",
             self.getJUPASReport("overallRating"),
             jupas_column,
         )
@@ -147,12 +162,15 @@ class Report:
 
     def writePercentileCSV(self):
         writeCSV(
-            "./report/percentile.csv", self.getJUPASReport("percentile"), jupas_column
+            f"{report_location}/percentile.csv",
+            self.getJUPASReport("percentile"),
+            jupas_column,
         )
         print("Report is generated: percentile.csv")
 
     def writeStatisticCSV(self):
-        writeCSV("./report/statistic.csv", self.statistic, statistic_column)
+        writeCSV(f"{report_location}/statistic.csv",
+                 self.statistic, statistic_column)
         print("Report is generated: statistic.csv")
 
     def writeAll(self):

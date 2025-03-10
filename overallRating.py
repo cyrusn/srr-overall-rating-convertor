@@ -10,13 +10,14 @@ class OverallRating:
     @property
     def score(self):
         score = evaluateOverallRatingScore(self.grade, self.percentile)
+        scoreWithOldFormula = evaluateOverallRatingScoreWithOldFormula(self.percentile)
+
+        if self.subject == "csd":
+            return scoreWithOldFormula
 
         if self.subject in core_subjects:
             # for core subjects, score is compated with old formula
             # to max student's benefit
-            scoreWithOldFormula = evaluateOverallRatingScoreWithOldFormula(
-                self.percentile
-            )
             return max(scoreWithOldFormula, score)
 
         return score

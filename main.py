@@ -8,15 +8,31 @@ from constant import (
     f6_report_dict,
     f5_term1_report_dict,
     f5_term2_report_dict,
+    f5_term2_grade_dict,
+    f6_grade_dict,
     gradings_f5_term1,
     gradings_f5_term2,
     gradings_f6,
 )
 
 terms: List[Term] = [
-    {"score": f6_report_dict, "ratio": 0.2, "gradings": gradings_f6},
-    {"score": f5_term2_report_dict, "ratio": 0.4, "gradings": gradings_f5_term2},
-    {"score": f5_term1_report_dict, "ratio": 0.4, "gradings": gradings_f5_term1},
+    {
+        "scores": f6_report_dict,
+        "ratio": 0.5,
+        "gradings": gradings_f6,
+        "grades": f6_grade_dict
+    },
+    {
+        "scores": f5_term2_report_dict,
+        "ratio": 0.25,
+        "gradings": gradings_f5_term2,
+        "grades": f5_term2_grade_dict
+    },
+    {
+        "scores": f5_term1_report_dict,
+        "ratio": 0.25,
+        "gradings": gradings_f5_term1
+    },
 ]
 
 subject_scores = Subject_Scores()

@@ -1,12 +1,11 @@
 from functools import reduce
-
 from subject import Subject, Grading
 from constant import students_dict, electives, core_subjects
-
 from typing import TypedDict, List, Dict
 
 
 class StudentDict(TypedDict):
+    # student info
     regno: str
     classcode: str
     classno: int
@@ -15,12 +14,15 @@ class StudentDict(TypedDict):
 
 
 class Term(TypedDict):
-    score: List[dict]
+    # term info
+    scores: List[dict]
+    grades: List[dict]
     ratio: float
     gradings: List[Grading]
 
 
 class Performance(TypedDict):
+    # student performance
     score: float  # average score
     grade: float  # average predicted grade
 
@@ -38,22 +40,37 @@ class Student:
         return core_subjects + electives[self.regno]
 
     def getPerformances(self, terms: List[Term]) -> Dict[str, Performance]:
+        print(self.regno)
         result = {}
         for subj in self.subjects:
             result[subj] = self.getSubjectPerformance(subj, terms)
         return result
 
-    def getSubjectPerformance(self, subject_id: str, terms: List[Term]) -> Performance:
+    def getSubjectPerformance(
+            self, subject_id: str,
+            terms: List[Term]) -> Performance:
         regno = self.regno
         performance: Performance = {"score": 0, "grade": 0}
 
         def reducer(acc, term):
             subj = Subject(subject_id)
-            score = term["score"][regno][subject_id]
+            score = term["scores"][regno][subject_id]
             gradings = term["gradings"]
             ratio = term["ratio"]
-            grade = subj.scoreToGrade(score, gradings)
+            if 'grades' in term.keys():
+                try:
+                    grade = term["grades"][regno][subject_id]
+                except:
+                    grade = subj.scoreToGrade(
+                        score, gradings)
+
+            else:
+                grade = subj.scoreToGrade(
+                    score, gradings)
+
+            print(score, ratio, subj.id)
             acc["score"] += score * ratio
+            print(grade, regno)
             acc["grade"] += grade * ratio
             return acc
 
@@ -65,15 +82,18 @@ if __name__ == "__main__":
         f6_report_dict,
         f5_term1_report_dict,
         f5_term2_report_dict,
+        f5_term2_grade_dict,
         gradings_f5_term1,
         gradings_f5_term2,
         gradings_f6,
     )
 
     terms: List[Term] = [
-        {"score": f6_report_dict, "ratio": 0.5, "gradings": gradings_f6},
-        {"score": f5_term2_report_dict, "ratio": 0.25, "gradings": gradings_f5_term2},
-        {"score": f5_term1_report_dict, "ratio": 0.25, "gradings": gradings_f5_term1},
+        {"scores": f6_report_dict, "ratio": 0.5, "gradings": gradings_f6},
+        {"scores": f5_term2_report_dict, "ratio": 0.25,
+            "gradings": gradings_f5_term2, "grades": f5_term2_grade_dict},
+        {"scores": f5_term1_report_dict, "ratio": 0.25,
+         "gradings": gradings_f5_term1},
     ]
 
     sts = Student("1211017")

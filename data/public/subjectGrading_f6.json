@@ -2,12 +2,12 @@
   {
     "subject": "csd",
     "grade": 1,
-    "range": [0, 34]
+    "range": [0, 37]
   },
   {
     "subject": "csd",
     "grade": 2,
-    "range": [35, 100]
+    "range": [38, 100]
   },
   {
     "subject": "bafs",
@@ -57,22 +57,22 @@
   {
     "subject": "bio",
     "grade": 1,
-    "range": [50, 79]
+    "range": [50, 75]
   },
   {
     "subject": "bio",
     "grade": 2,
-    "range": [80, 119]
+    "range": [76, 115]
   },
   {
     "subject": "bio",
     "grade": 3,
-    "range": [120, 149]
+    "range": [116, 140]
   },
   {
     "subject": "bio",
     "grade": 4,
-    "range": [150, 164]
+    "range": [141, 164]
   },
   {
     "subject": "bio",
@@ -162,12 +162,12 @@
   {
     "subject": "chi",
     "grade": 6,
-    "range": [193, 207]
+    "range": [193, 230]
   },
   {
     "subject": "chi",
     "grade": 7,
-    "range": [208, 300]
+    "range": [231, 300]
   },
   {
     "subject": "chist",
