@@ -1,5 +1,5 @@
 from functools import reduce
-from subject import Subject, Grading
+from subject import Subject
 from constant import students_dict, electives, core_subjects
 from typing import TypedDict, List, Dict
 
