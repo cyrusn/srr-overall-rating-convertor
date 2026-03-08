@@ -41,30 +41,30 @@ Open `v2/config.py` and update the following:
 - `GOOGLE_KEY_FILE`: The filename of your JSON key (e.g., `.env.key.json`).
 
 ### 4. Running
-You can run the program directly from this root directory:
+You can run the program directly from this root directory. You **must** provide the spreadsheet ID using the `-s` (or `--ssid`) flag.
 
 **macOS / Linux:**
 ```bash
-./run_v2.sh
+./run_v2.sh -s "YOUR_SPREADSHEET_ID"
 ```
 
 **Windows:**
-Double-click `run_v2.bat` or run from Command Prompt/PowerShell:
+Run from Command Prompt/PowerShell:
 ```powershell
-.\run_v2.bat
+.\run_v2.bat -s "YOUR_SPREADSHEET_ID"
 ```
 
 ### 5. Advanced Usage (Arguments)
-You can override the configuration using command-line flags.
+You can also override other configurations, such as the key file path:
 
 **macOS / Linux:**
 ```bash
-./run_v2.sh --ssid "YOUR_SPREADSHEET_ID" --key-file "path/to/key.json"
+./run_v2.sh -s "YOUR_SPREADSHEET_ID" --key-file "path/to/key.json"
 ```
 
 **Windows:**
 ```powershell
-.\run_v2.bat --ssid "YOUR_SPREADSHEET_ID" --key-file "path/to/key.json"
+.\run_v2.bat -s "YOUR_SPREADSHEET_ID" --key-file "path/to/key.json"
 ```
 
 For detailed technical details, see the [v2 README](./v2/README.md).
