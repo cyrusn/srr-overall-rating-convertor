@@ -41,16 +41,16 @@ if __name__ == "__main__":
         f6_report_dict,
         f5_term1_report_dict,
         f5_term2_report_dict,
-        gradings_f5_term1,
-        gradings_f5_term2,
-        gradings_f6,
+        f5_term1_grade_dict,
+        f5_term2_grade_dict,
+        f6_grade_dict,
     )
 
     subj_stat = Subject_Scores()
     terms: List[Term] = [
-        {"score": f5_term1_report_dict, "ratio": 0.25, "gradings": gradings_f5_term1},
-        {"score": f5_term2_report_dict, "ratio": 0.25, "gradings": gradings_f5_term2},
-        {"score": f6_report_dict, "ratio": 0.5, "gradings": gradings_f6},
+        {"scores": f5_term1_report_dict, "ratio": 0.25, "grades": f5_term1_grade_dict},
+        {"scores": f5_term2_report_dict, "ratio": 0.25, "grades": f5_term2_grade_dict},
+        {"scores": f6_report_dict, "ratio": 0.5, "grades": f6_grade_dict},
     ]
 
     students = ["1214010", "1211017", "1211012", "1433023"]

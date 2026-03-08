@@ -12,7 +12,7 @@ sys.path.append(parent_dir)
 try:
     from config import (
         SPREADSHEET_ID,
-        SHEET_STUDENTS, SHEET_SUBJECT_INFO, SHEET_GRADING_F5_T1, SHEET_GRADING_F5_T2, SHEET_GRADING_F6,
+        SHEET_STUDENTS, SHEET_SUBJECT_INFO,
         SHEET_F6_REPORT, SHEET_F5_T1_REPORT, SHEET_F5_T2_REPORT, SHEET_F5_T2_GRADE, SHEET_F6_GRADE
     )
 except ImportError:
@@ -121,22 +121,6 @@ def transform_students(data):
 def transform_report(data):
     return data # Already list of dicts
 
-def transform_grading(data):
-    # data is list of dicts: [{'subject': 'chi', 'level': 5, 'range': [80, 100]}, ...]
-    # Transform to: [{'subject': 'chi', 'level': 5, 'lower': 80, 'upper': 100}, ...]
-    result = []
-    for item in data:
-        new_item = item.copy()
-        rng = new_item.pop('range', [])
-        if isinstance(rng, list) and len(rng) == 2:
-            new_item['lower'] = rng[0]
-            new_item['upper'] = rng[1]
-        else:
-            new_item['lower'] = ""
-            new_item['upper'] = ""
-        result.append(new_item)
-    return result
-
 # Execution
 if __name__ == "__main__":
     print(f"Starting upload to Spreadsheet: {SPREADSHEET_ID}")
@@ -161,9 +145,6 @@ if __name__ == "__main__":
 
     # Public Data
     upload_json_to_sheet(os.path.join(V1_DATA_PUBLIC, "subjectInfo.json"), SHEET_SUBJECT_INFO, transform_subject_info)
-    upload_json_to_sheet(os.path.join(V1_DATA_PUBLIC, "subjectGrading.json"), SHEET_GRADING_F5_T1, transform_grading)
-    upload_json_to_sheet(os.path.join(V1_DATA_PUBLIC, "subjectGrading.json"), SHEET_GRADING_F5_T2, transform_grading)
-    upload_json_to_sheet(os.path.join(V1_DATA_PUBLIC, "subjectGrading_f6.json"), SHEET_GRADING_F6, transform_grading)
 
     # Private Data
     upload_json_to_sheet(os.path.join(V1_DATA_PRIVATE, "students.json"), SHEET_STUDENTS, transform_students)

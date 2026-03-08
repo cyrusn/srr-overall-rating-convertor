@@ -18,7 +18,6 @@ class Term(TypedDict):
     scores: List[dict]
     grades: List[dict]
     ratio: float
-    gradings: List[Grading]
 
 
 class Performance(TypedDict):
@@ -73,7 +72,6 @@ class Student:
             except (ValueError, TypeError):
                 score = 0.0
             
-            gradings = term["gradings"]
             ratio = term["ratio"]
             
             grade = None
@@ -90,12 +88,12 @@ class Student:
                 except:
                     pass
             
-            if grade is None:
-                 grade = subj.scoreToGrade(score, gradings)
-            
             # Ensure grade is numeric for calculation
             try:
-                grade = float(grade)
+                if grade is None:
+                    grade = 0.0
+                else:
+                    grade = float(grade)
             except (ValueError, TypeError):
                 grade = 0.0
 
@@ -113,18 +111,15 @@ if __name__ == "__main__":
         f6_report_dict,
         f5_term1_report_dict,
         f5_term2_report_dict,
+        f5_term1_grade_dict,
         f5_term2_grade_dict,
-        gradings_f5_term1,
-        gradings_f5_term2,
-        gradings_f6,
+        f6_grade_dict
     )
 
     terms: List[Term] = [
-        {"scores": f6_report_dict, "ratio": 0.5, "gradings": gradings_f6},
-        {"scores": f5_term2_report_dict, "ratio": 0.25,
-            "gradings": gradings_f5_term2, "grades": f5_term2_grade_dict},
-        {"scores": f5_term1_report_dict, "ratio": 0.25,
-         "gradings": gradings_f5_term1},
+        {"scores": f6_report_dict, "ratio": 0.5, "grades": f6_grade_dict},
+        {"scores": f5_term2_report_dict, "ratio": 0.25, "grades": f5_term2_grade_dict},
+        {"scores": f5_term1_report_dict, "ratio": 0.25, "grades": f5_term1_grade_dict},
     ]
 
     sts = Student("1211017")

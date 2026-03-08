@@ -40,28 +40,6 @@ def createStudentElectiveDict(lst):
         for item in lst if item.get("regno")
     }
 
-def parse_grading(gradings):
-    for g in gradings:
-        if 'grade' in g and g['grade'] is not None:
-            g['grade'] = int(g['grade'])
-        
-        # Handle new lower/upper columns and reconstruct 'range'
-        # The app logic expects 'range' to be [min, max]
-        if 'lower' in g and 'upper' in g:
-             try:
-                 lower = int(g['lower'])
-                 upper = int(g['upper'])
-                 g['range'] = [lower, upper]
-             except (ValueError, TypeError):
-                 g['range'] = [0, 0] # Or handle error
-        # Fallback for old style if 'range' exists as string (backward compatibility or if upload failed)
-        elif 'range' in g and isinstance(g['range'], str):
-            try:
-                g['range'] = ast.literal_eval(g['range'])
-            except:
-                pass
-    return gradings
-
 # Initialize Google Sheets
 gs = GoogleSheet()
 
@@ -78,11 +56,6 @@ if gs.spreadsheet_id and gs.service:
     
     subjectIDs = list(subject_info_dict.keys())
     subjectCodes = [value["code"] for key, value in subject_info_dict.items()]
-    
-    # Gradings
-    gradings_f5_term1 = parse_grading(gs.get_sheet_data(SHEET_GRADING_F5_T1))
-    gradings_f5_term2 = parse_grading(gs.get_sheet_data(SHEET_GRADING_F5_T2))
-    gradings_f6 = parse_grading(gs.get_sheet_data(SHEET_GRADING_F6))
     
     # Students - Now using F6Report as the primary source for student basic info
     students = gs.get_sheet_data(SHEET_F6_REPORT)
@@ -123,6 +96,9 @@ if gs.spreadsheet_id and gs.service:
     
     f5_term1_report_json = process_report(gs.get_sheet_data(SHEET_F5_T1_REPORT))
     f5_term1_report_dict = keyByRegno(f5_term1_report_json)
+
+    f5_term1_grade_json = process_report(gs.get_sheet_data(SHEET_F5_T1_GRADE))
+    f5_term1_grade_dict = keyByRegno(f5_term1_grade_json)
     
     f5_term2_report_json = process_report(gs.get_sheet_data(SHEET_F5_T2_REPORT))
     f5_term2_report_dict = keyByRegno(f5_term2_report_json)
@@ -136,14 +112,12 @@ if gs.spreadsheet_id and gs.service:
 else:
     print("Warning: Google Sheets not configured or failed to initialize.")
     subject_info_dict = {}
-    gradings_f5_term1 = []
-    gradings_f5_term2 = []
-    gradings_f6 = []
     students = []
     students_dict = {}
     f6_report_dict = {}
     electives = {}
     f5_term1_report_dict = {}
+    f5_term1_grade_dict = {}
     f5_term2_report_dict = {}
     f5_term2_grade_dict = {}
     f6_grade_dict = {}

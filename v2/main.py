@@ -48,11 +48,9 @@ def main():
             f6_report_dict,
             f5_term1_report_dict,
             f5_term2_report_dict,
+            f5_term1_grade_dict,
             f5_term2_grade_dict,
             f6_grade_dict,
-            gradings_f5_term1,
-            gradings_f5_term2,
-            gradings_f6,
         )
     except Exception as e:
         print(f"\nCritical Error during initialization: {e}")
@@ -67,19 +65,17 @@ def main():
         {
             "scores": f6_report_dict,
             "ratio": 0.5,
-            "gradings": gradings_f6,
             "grades": f6_grade_dict
         },
         {
             "scores": f5_term2_report_dict,
             "ratio": 0.25,
-            "gradings": gradings_f5_term2,
             "grades": f5_term2_grade_dict
         },
         {
             "scores": f5_term1_report_dict,
             "ratio": 0.25,
-            "gradings": gradings_f5_term1
+            "grades": f5_term1_grade_dict
         },
     ]
 
