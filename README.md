@@ -18,10 +18,20 @@ This project calculates student ratings and percentiles based on report data. It
 
 ### 2. Setup
 First, set up your Python environment in the `v2` folder:
+
+**macOS / Linux:**
 ```bash
 cd v2
 python3 -m venv venv
-source venv/bin/activate  # Windows: .\venv\Scripts\activate
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+**Windows:**
+```powershell
+cd v2
+python -m venv venv
+.\venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
@@ -39,12 +49,22 @@ You can run the program directly from this root directory:
 ```
 
 **Windows:**
-Double-click `run_v2.bat`
+Double-click `run_v2.bat` or run from Command Prompt/PowerShell:
+```powershell
+.\run_v2.bat
+```
 
 ### 5. Advanced Usage (Arguments)
-You can override the configuration using command-line flags:
+You can override the configuration using command-line flags.
+
+**macOS / Linux:**
 ```bash
 ./run_v2.sh --ssid "YOUR_SPREADSHEET_ID" --key-file "path/to/key.json"
+```
+
+**Windows:**
+```powershell
+.\run_v2.bat --ssid "YOUR_SPREADSHEET_ID" --key-file "path/to/key.json"
 ```
 
 For detailed technical details, see the [v2 README](./v2/README.md).
